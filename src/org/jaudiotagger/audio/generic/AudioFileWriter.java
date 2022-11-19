@@ -103,7 +103,7 @@ public abstract class AudioFileWriter
         try
         {
 
-            tempF = File.createTempFile(af.getFile().getName().replace('.', '_'), TEMP_FILENAME_SUFFIX, af.getFile().getParentFile());
+            tempF = Files.createTempFile(af.getFile().getParentFile().toPath(),af.getFile().getName().replace('.','_'),TEMP_FILENAME_SUFFIX).toFile();
             rafTemp = new RandomAccessFile(tempF, WRITE_MODE);
             raf = new RandomAccessFile(af.getFile(), WRITE_MODE);
             raf.seek(0);
@@ -314,7 +314,7 @@ public abstract class AudioFileWriter
         // Create temporary File
         try
         {
-            newFile = File.createTempFile(af.getFile().getName().replace('.', '_'), TEMP_FILENAME_SUFFIX, af.getFile().getParentFile());
+            newFile = Files.createTempFile(af.getFile().getParentFile().toPath(),af.getFile().getName().replace('.','_'),TEMP_FILENAME_SUFFIX).toFile();
         }
         // Unable to create temporary file, can happen in Vista if have Create
         // Files/Write Data set to Deny
@@ -325,7 +325,7 @@ public abstract class AudioFileWriter
                 try
                 {
 
-                    newFile = File.createTempFile(af.getFile().getName().substring(0, FILE_NAME_TOO_LONG_SAFE_LIMIT).replace('.', '_'), TEMP_FILENAME_SUFFIX, af.getFile().getParentFile());
+                    newFile = Files.createTempFile(af.getFile().getParentFile().toPath(),af.getFile().getName().substring(0,FILE_NAME_TOO_LONG_SAFE_LIMIT).replace('.','_'),TEMP_FILENAME_SUFFIX).toFile();
 
                 }
                 catch (IOException ioe2)
