@@ -42,6 +42,7 @@ import java.nio.channels.FileLock;
 import java.nio.channels.WritableByteChannel;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.util.*;
 import java.util.logging.Level;
 
@@ -1317,7 +1318,7 @@ public abstract class AbstractID3v2Tag extends AbstractID3Tag implements Tag
 
         try
         {
-            paddedFile = File.createTempFile(Utils.getBaseFilenameForTempFile(file), ".new", file.getParentFile());
+            paddedFile = Files.createTempFile(file.getParentFile().toPath(),Utils.getBaseFilenameForTempFile(file),".new").toFile();
             logger.finest("Created temp file:" + paddedFile.getName() + " for " + file.getName());
         }
         //Vista:Can occur if have Write permission on folder this file would be created in Denied

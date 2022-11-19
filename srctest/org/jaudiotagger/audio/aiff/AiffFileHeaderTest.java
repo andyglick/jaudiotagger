@@ -6,6 +6,7 @@ import org.jaudiotagger.audio.exceptions.CannotReadException;
 import java.io.*;
 import java.nio.channels.FileChannel;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.util.Random;
 
 import static org.jaudiotagger.audio.aiff.AiffType.AIFC;
@@ -90,7 +91,7 @@ public class AiffFileHeaderTest extends TestCase {
     }
 
     private static File createAIFF(final String form, final String formType, final int size) throws IOException {
-        final File tempFile = File.createTempFile(AiffFileHeaderTest.class.getSimpleName(), ".aif");
+        final File tempFile = Files.createTempFile(AiffFileHeaderTest.class.getSimpleName(),".aif").toFile();
         tempFile.deleteOnExit();
 
         try (final DataOutputStream out = new DataOutputStream(new FileOutputStream(tempFile))) {

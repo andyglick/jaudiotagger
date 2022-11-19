@@ -29,7 +29,7 @@ public class AudioFileWriterTest extends TestCase {
 
     @Override
     protected void setUp() throws IOException {
-        final File file = File.createTempFile("AudioFileWriterTest", ".bin");
+        final File file = Files.createTempFile("AudioFileWriterTest",".bin").toFile();
         try (final FileOutputStream out = new FileOutputStream(file)) {
             for (int i=0; i<100; i++) out.write("Some random stuff\n".getBytes(StandardCharsets.US_ASCII));
         }
